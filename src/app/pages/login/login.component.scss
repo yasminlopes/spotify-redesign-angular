@@ -1,0 +1,43 @@
+@import 'variaveis';
+
+/* Significado de Host: É como se tivesse uma div fora, e eu estivesse selecionando essa div de fora. Para não precisar criar essa div, o host faz isso pra vc */
+
+:host {
+  background-color: #222;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+
+  .base {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    padding: 50px;
+
+    img {
+      width: 40%;
+    }
+
+    button {
+      font-size: 1.5rem;
+      font-weight: 600;
+      min-width: 300px;
+      padding: 20px;
+      border-radius: 50px;
+      background-color: $cor-primaria2;
+      color: #222;
+      border: 0;
+      cursor: pointer;
+    }
+    h1{
+      color: white;
+      font-weight: 400;
+      text-align: center;
+    }
+    h1 > span{
+      font-weight: 600;
+    }
+  }
+}
+
