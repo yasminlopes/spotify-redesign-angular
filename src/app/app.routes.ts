@@ -1,4 +1,5 @@
-import { Routes } from "@angular/router";
+import { RouteConfigLoadEnd, Routes } from "@angular/router";
+import { AutenticacaoGuard } from "./guards/autenticacao.guard";
 
 export const AppRotas: Routes = [
 
@@ -12,5 +13,11 @@ export const AppRotas: Routes = [
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(x => x.LoginModule)
   
+  },
+
+  {
+    path: 'player',
+    loadChildren: () => import('./pages/player/player.module').then(x => x.PlayerModule),
+    canLoad: [AutenticacaoGuard]
   }
 ]
