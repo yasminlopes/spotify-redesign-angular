@@ -33,8 +33,10 @@ export class PainelEsquerdoComponent implements OnInit {
     this.btnSelecionado = botao;
   }
 
-  async searchPlaylists(){
-    this.playlists = await this.spotifyService.searchUserPlaylist();
-    
+  searchPlaylists(){
+    setTimeout(async () => {
+      this.playlists = await this.spotifyService.searchUserPlaylist();
+    }, 500);
   }
+
 }

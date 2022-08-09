@@ -27,11 +27,8 @@ export class SpotifyService {
     return false;
 
     try {
-      console.log('aqui')
       this.definirAccessToken(token);
       await this.getSpotifyUser()
-      console.log('!!this.usuario',!!this.usuario)
-      console.log('rsrs',  this.usuario)
       return !!this.usuario;
 
     }catch(ex){
@@ -40,11 +37,11 @@ export class SpotifyService {
   }
 
   async getSpotifyUser(){
-    console.log('getSpotifyUser')
+    //console.log('getSpotifyUser')
     const userInfo = await this.spotifyApi.getMe();
     this.usuario = SpotifyUserParaUsuario(userInfo)
 
-    console.log(this.usuario)
+    //console.log(this.usuario)
   }
 
 /* LOGIN AUTH SPOTIFY */
@@ -77,10 +74,8 @@ export class SpotifyService {
 
   /* BUSCANDO PLAYLISTS DO USUARIO, SETANDO AS 50 PRIMEIRAS PLAYLISTS */
   async searchUserPlaylist(offset = 0, limit = 50): Promise<IPlaylist[]>{
-const test = "id";
-//console.log(SpotifyPlaylistParaPlaylist)
-  //console.log(this.usuario)
-    const playlists = await this.spotifyApi.getUserPlaylists(test, { offset, limit })
+  //const test = "id";
+    const playlists = await this.spotifyApi.getUserPlaylists(this.usuario.id, { offset, limit })
     console.log(playlists)
     return playlists.items.map(SpotifyPlaylistParaPlaylist);    
   }
