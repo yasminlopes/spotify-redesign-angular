@@ -2,6 +2,7 @@
   <div class="image-container flex flex-center">
     <img src="assets/img/spotify-logo.svg" alt="">
   </div>
+  
   <div class="menu-container flex lista">
     <app-btn-menu
       [descricao]="'Home'"
@@ -26,5 +27,22 @@
     >
       <fa-icon [icon]="artistaIcone" ></fa-icon>
     </app-btn-menu>
+
+    <div class="menu-container flex">
+      <span class="playlist-title">
+        Playlists
+      </span>
+      <!-- PLAYLIST-->
+      <div class="playlist-scroll">
+        <app-btn-menu 
+        *ngFor="let playlist of playlists"
+      [descricao]="playlist.nome"
+      [selecionado]="btnSelecionado === playlist.id"
+      (click)="btnClick(playlist.id)"
+    >
+      <fa-icon [icon]="playlistIcone" ></fa-icon>
+    </app-btn-menu>
+      </div>
+    </div>
 
   </div>

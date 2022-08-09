@@ -2,15 +2,16 @@ import { Injectable } from '@angular/core';
 import { SpotifyConfig } from 'src/environments/environment';
 import Spotify from 'spotify-web-api-js'
 import { IUsuario } from '../Interfaces/IUsuario';
-import { SpotifyUserParaUsuario } from '../common/spotifyHelper';
+import { SpotifyPlaylistParaPlaylist, SpotifyUserParaUsuario } from '../common/spotifyHelper';
+import { IPlaylist } from '../Interfaces/IPlaylist';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpotifyService {
 
-  spotifyApi: Spotify.SpotifyWebApiJs = null;
-  usuario: IUsuario;
+  public spotifyApi: Spotify.SpotifyWebApiJs = null;
+  public usuario: IUsuario;
 
   constructor() { 
     this.spotifyApi = new Spotify();
@@ -26,8 +27,11 @@ export class SpotifyService {
     return false;
 
     try {
+      console.log('aqui')
       this.definirAccessToken(token);
       await this.getSpotifyUser()
+      console.log('!!this.usuario',!!this.usuario)
+      console.log('rsrs',  this.usuario)
       return !!this.usuario;
 
     }catch(ex){
@@ -36,8 +40,11 @@ export class SpotifyService {
   }
 
   async getSpotifyUser(){
+    console.log('getSpotifyUser')
     const userInfo = await this.spotifyApi.getMe();
     this.usuario = SpotifyUserParaUsuario(userInfo)
+
+    console.log(this.usuario)
   }
 
 /* LOGIN AUTH SPOTIFY */
@@ -67,6 +74,20 @@ export class SpotifyService {
     localStorage.setItem('token', token);
     //this.spotifyApi.skipToNext();
   }
+
+  /* BUSCANDO PLAYLISTS DO USUARIO, SETANDO AS 50 PRIMEIRAS PLAYLISTS */
+  async searchUserPlaylist(offset = 0, limit = 50): Promise<IPlaylist[]>{
+const test = "id";
+//console.log(SpotifyPlaylistParaPlaylist)
+  //console.log(this.usuario)
+    const playlists = await this.spotifyApi.getUserPlaylists(test, { offset, limit })
+    console.log(playlists)
+    return playlists.items.map(SpotifyPlaylistParaPlaylist);    
   }
+  
+  }
+
+
+  
 
 

@@ -44,6 +44,29 @@ $m-entre-menus: 10px;
           margin-bottom: $m-entre-menus;
         }
       }
+
+      .playlist-title{
+        margin: 10px 0;
+        align-self: flex-start;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: .7rem;
+        color: $cor-3;        
+      }
+
+      .playlist-scroll {
+        width: 100%;        
+        max-height: 50vh;        
+        overflow-y: auto;
+
+        &::-webkit-scrollbar{
+          display: none;
+        }
+
+        *{
+          margin-bottom: $m-entre-menus;
+        }
+      }
     }
   }
 }
